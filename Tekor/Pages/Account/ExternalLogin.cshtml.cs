@@ -14,13 +14,13 @@ namespace Tekor.Pages.Account
 {
     public class ExternalLoginModel : PageModel
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<CompanyAccount> _signInManager;
+        private readonly UserManager<CompanyAccount> _userManager;
         private readonly ILogger<ExternalLoginModel> _logger;
 
         public ExternalLoginModel(
-            SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager,
+            SignInManager<CompanyAccount> signInManager,
+            UserManager<CompanyAccount> userManager,
             ILogger<ExternalLoginModel> logger)
         {
             _signInManager = signInManager;
@@ -108,7 +108,7 @@ namespace Tekor.Pages.Account
                 {
                     throw new ApplicationException("Error loading external login information during confirmation.");
                 }
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var user = new CompanyAccount { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

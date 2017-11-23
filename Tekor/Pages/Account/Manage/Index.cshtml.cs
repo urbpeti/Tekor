@@ -14,13 +14,13 @@ namespace Tekor.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<CompanyAccount> _userManager;
+        private readonly SignInManager<CompanyAccount> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public IndexModel(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
+            UserManager<CompanyAccount> userManager,
+            SignInManager<CompanyAccount> signInManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;

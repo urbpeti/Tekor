@@ -13,10 +13,10 @@ namespace Tekor.Pages.Account
 {
     public class LoginWithRecoveryCodeModel : PageModel
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly SignInManager<CompanyAccount> _signInManager;
         private readonly ILogger<LoginWithRecoveryCodeModel> _logger;
 
-        public LoginWithRecoveryCodeModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginWithRecoveryCodeModel> logger)
+        public LoginWithRecoveryCodeModel(SignInManager<CompanyAccount> signInManager, ILogger<LoginWithRecoveryCodeModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

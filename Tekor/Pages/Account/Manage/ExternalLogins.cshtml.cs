@@ -12,12 +12,12 @@ namespace Tekor.Pages.Account.Manage
 {
     public class ExternalLoginsModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<CompanyAccount> _userManager;
+        private readonly SignInManager<CompanyAccount> _signInManager;
 
         public ExternalLoginsModel(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            UserManager<CompanyAccount> userManager,
+            SignInManager<CompanyAccount> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

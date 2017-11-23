@@ -11,9 +11,9 @@ namespace Tekor.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<CompanyAccount> _userManager;
 
-        public ConfirmEmailModel(UserManager<ApplicationUser> userManager)
+        public ConfirmEmailModel(UserManager<CompanyAccount> userManager)
         {
             _userManager = userManager;
         }
