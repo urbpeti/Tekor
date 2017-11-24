@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Tekor.Data;
-using Tekor.Services;
 
 namespace Tekor.Pages.Account
 {
@@ -17,18 +16,15 @@ namespace Tekor.Pages.Account
         private readonly SignInManager<CompanyAccount> _signInManager;
         private readonly UserManager<CompanyAccount> _userManager;
         private readonly ILogger<LoginModel> _logger;
-        private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<CompanyAccount> userManager,
             SignInManager<CompanyAccount> signInManager,
-            ILogger<LoginModel> logger,
-            IEmailSender emailSender)
+            ILogger<LoginModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
         }
 
         [BindProperty]
@@ -73,7 +69,6 @@ namespace Tekor.Pages.Account
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(Input.Email, callbackUrl);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(Url.GetLocalUrl(returnUrl));

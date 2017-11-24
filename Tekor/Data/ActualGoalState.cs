@@ -10,7 +10,7 @@ namespace Tekor.Data
         public string ID { get; set; }
 
         public UserAccount User { get; set; }
-        public Goal goal { get; set; }
-        public double actualValue { get; set; }
+        public Goal Goal { get; set; }
+        public double ActualValue { get; set; }
     }
 }

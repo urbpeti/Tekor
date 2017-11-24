@@ -11,9 +11,10 @@ using Tekor.Data;
 namespace Tekor.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171123191307_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,11 +134,11 @@ namespace Tekor.Migrations
                     b.Property<string>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<double>("ActualValue");
-
                     b.Property<string>("GoalID");
 
                     b.Property<string>("UserID");
+
+                    b.Property<double>("actualValue");
 
                     b.HasKey("ID");
 
@@ -209,8 +210,6 @@ namespace Tekor.Migrations
                     b.Property<string>("Description");
 
                     b.Property<double>("GoalValue");
-
-                    b.Property<string>("OwnerId");
 
                     b.Property<string>("RewardID");
 
@@ -297,7 +296,7 @@ namespace Tekor.Migrations
             modelBuilder.Entity("Tekor.Data.ActualGoalState", b =>
                 {
                     b.HasOne("Tekor.Data.Goal", "Goal")
-                        .WithMany("ActualGoalStates")
+                        .WithMany("actualGoalStates")
                         .HasForeignKey("GoalID");
 
                     b.HasOne("Tekor.Data.UserAccount", "User")

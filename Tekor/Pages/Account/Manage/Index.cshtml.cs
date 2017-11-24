@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Tekor.Data;
-using Tekor.Services;
 
 namespace Tekor.Pages.Account.Manage
 {
@@ -16,16 +15,13 @@ namespace Tekor.Pages.Account.Manage
     {
         private readonly UserManager<CompanyAccount> _userManager;
         private readonly SignInManager<CompanyAccount> _signInManager;
-        private readonly IEmailSender _emailSender;
 
         public IndexModel(
             UserManager<CompanyAccount> userManager,
-            SignInManager<CompanyAccount> signInManager,
-            IEmailSender emailSender)
+            SignInManager<CompanyAccount> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;
         }
 
         public string Username { get; set; }
@@ -119,7 +115,6 @@ namespace Tekor.Pages.Account.Manage
 
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-            await _emailSender.SendEmailConfirmationAsync(user.Email, callbackUrl);
 
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToPage();
