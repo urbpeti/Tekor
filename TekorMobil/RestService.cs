@@ -22,6 +22,8 @@ namespace TekorMobil
             HttpClient client;
             client = new HttpClient();
 
+            /*client.GetAsync("")*/
+
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
         }
 
