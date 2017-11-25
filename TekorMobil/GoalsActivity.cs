@@ -16,6 +16,9 @@ namespace TekorMobil
     [Activity(Label = "GoalsActivity")]
     public class GoalsActivity : Activity
     {
+        public class GoalsListData {
+            public List<GoalsAdapter.ListItemData> goalItems;
+        }
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -24,10 +27,10 @@ namespace TekorMobil
 
             var goals = Intent.GetStringExtra("Data") ?? string.Empty;
 
-            var list = JsonConvert.DeserializeObject<List<GoalsAdapter.ListItemData>>(goals);
+            var list = JsonConvert.DeserializeObject<GoalsListData>(goals);
 
-            IList<GoalsAdapter.ListItemData> goalsStringList = list;
-            var goalAdapter = new GoalsAdapter(this,list);
+            IList<GoalsAdapter.ListItemData> goalList = list.goalItems;
+            var goalAdapter = new GoalsAdapter(this, goalList);
             var goalListView = FindViewById<ListView>(Resource.Id.GoalListView);
             goalListView.Adapter = goalAdapter;
 

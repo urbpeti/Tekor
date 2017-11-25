@@ -17,9 +17,12 @@ namespace Tekor.Controllers
         {
             _context = context;
         }
-        [HttpGet]
-        public async Task<IActionResult> GetList()
+        [HttpGet("{token?}")]
+        public async Task<IActionResult> GetList(string token)
         {
+            if (!await _context.UserAcount.AnyAsync(x => x.UserToken == token)) {
+                return Unauthorized();
+            }
             List<Goal> test = _context.Goal.Include(x=> x.Reward).ToList();
             List<object> goalItems = test.Select(x => new { x.Description ,x.Reward.Name }).ToList<object>();
 

@@ -44,29 +44,56 @@ namespace TekorMobil
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040002
-			public const int GoalDescription = 2130968578;
-			
-			// aapt resource value: 0x7f040000
-			public const int GoalListView = 2130968576;
-			
-			// aapt resource value: 0x7f040001
-			public const int GoalName = 2130968577;
-			
 			// aapt resource value: 0x7f040007
-			public const int LoginButton = 2130968583;
+			public const int Email = 2130968583;
 			
-			// aapt resource value: 0x7f040006
-			public const int Password = 2130968582;
+			// aapt resource value: 0x7f04000f
+			public const int EmailText = 2130968591;
+			
+			// aapt resource value: 0x7f04000c
+			public const int ErrorMessage = 2130968588;
 			
 			// aapt resource value: 0x7f040005
-			public const int PasswordText = 2130968581;
-			
-			// aapt resource value: 0x7f040004
-			public const int UserName = 2130968580;
+			public const int GoalDescription = 2130968581;
 			
 			// aapt resource value: 0x7f040003
-			public const int UserNameText = 2130968579;
+			public const int GoalListView = 2130968579;
+			
+			// aapt resource value: 0x7f040004
+			public const int GoalName = 2130968580;
+			
+			// aapt resource value: 0x7f04000d
+			public const int GoalsMenuButton = 2130968589;
+			
+			// aapt resource value: 0x7f04000a
+			public const int LoginButton = 2130968586;
+			
+			// aapt resource value: 0x7f04000e
+			public const int MyCuponsButton = 2130968590;
+			
+			// aapt resource value: 0x7f040009
+			public const int Password = 2130968585;
+			
+			// aapt resource value: 0x7f040008
+			public const int PasswordText = 2130968584;
+			
+			// aapt resource value: 0x7f040010
+			public const int Registration = 2130968592;
+			
+			// aapt resource value: 0x7f04000b
+			public const int RegistrationButton = 2130968587;
+			
+			// aapt resource value: 0x7f040006
+			public const int UserEmailText = 2130968582;
+			
+			// aapt resource value: 0x7f040000
+			public const int linearLayout1 = 2130968576;
+			
+			// aapt resource value: 0x7f040001
+			public const int textView1 = 2130968577;
+			
+			// aapt resource value: 0x7f040002
+			public const int textView2 = 2130968578;
 			
 			static Id()
 			{
@@ -88,7 +115,13 @@ namespace TekorMobil
 			public const int GoalsListItem = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int Main = 2130837506;
+			public const int Login = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int Menu = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int Registration = 2130837508;
 			
 			static Layout()
 			{

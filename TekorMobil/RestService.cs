@@ -18,7 +18,7 @@ namespace TekorMobil
     {
         static string authHeaderValue;
 
-        public static void test() {
+        public static void Test() {
             HttpClient client;
             client = new HttpClient();
 
@@ -27,9 +27,15 @@ namespace TekorMobil
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
         }
 
-        public static void setUp(string username, string password) {
+        public static void SetUp(string username, string password) {
             var authData = string.Format("{0}:{1}", username, password);
             authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
         }
+        public static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+
     }
 }

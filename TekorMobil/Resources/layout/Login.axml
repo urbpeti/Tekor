@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:text="UserName:"
+        android:text="Email"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/UserNameText" />
+        android:id="@+id/UserEmailText" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/UserName" />
+        android:id="@+id/Email" />
     <TextView
         android:text="Password"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -29,4 +29,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/LoginButton" />
+    <Button
+        android:text="Registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/RegistrationButton" />
+    <TextView
+        android:text="Error"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ErrorMessage"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="invisible" />
 </LinearLayout>
