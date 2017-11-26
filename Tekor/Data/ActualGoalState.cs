@@ -12,5 +12,7 @@ namespace Tekor.Data
         public UserAccount User { get; set; }
         public Goal Goal { get; set; }
         public double ActualValue { get; set; }
+
+        public bool IsFinished { get; set; }
     }
 }

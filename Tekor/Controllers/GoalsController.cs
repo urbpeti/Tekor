@@ -24,10 +24,25 @@ namespace Tekor.Controllers
                 return Unauthorized();
             }
             List<Goal> test = _context.Goal.Include(x=> x.Reward).ToList();
-            List<object> goalItems = test.Select(x => new { x.Description ,x.Reward.Name, x.ID }).ToList<object>();
+            List<object> goalItems = test.Select(x => new { x.Description ,x.Name, x.ID }).ToList<object>();
 
-            //List<string> test = new List<string> { "siker", "siker2", "siker3" };
             return Ok(new { goalItems = goalItems});
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetFinishedList([FromQuery]string token)
+        {
+            if (!await _context.UserAcount.AnyAsync(x => x.UserToken == token))
+            {
+                return Unauthorized();
+            }
+            List<ActualGoalState> test = _context.ActualGoalState.Include(x => x.Goal)
+                                                                 .Include(x => x.User)
+                                                                 .Where(x => x.User.UserToken == token && x.IsFinished)
+                                                                 .ToList();
+            List<object> goalItems = test.Select(x => new { x.Goal.Description, x.Goal.Name, x.Goal.ID }).ToList<object>();
+
+            return Ok(new { goalItems = goalItems });
         }
     }
 }

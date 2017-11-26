@@ -9,6 +9,5 @@ namespace Tekor.Data
     {
         public string ID { get; set; }
         public string CuponCode { get; set; }
-        public string Name { get; set; }
     }
 }

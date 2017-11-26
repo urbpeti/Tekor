@@ -1,7 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+<LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:orientation="vertical"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/linearLayout1"
+    p1:paddingLeft="16dp"
+    p1:paddingRight="16dp"
+    p1:paddingTop="16dp">
+    <TextView xmlns:tools="http://schemas.android.com/tools"
+        p1:text="Large Text"
+        p1:textAppearance="?android:attr/textAppearanceLarge"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/GoalDetails_nameText"
+        p1:layout_marginBottom="5dp"
+        tools:text="Cél neve" />
+    <TextView xmlns:tools="http://schemas.android.com/tools"
+        p1:text="Small Text"
+        p1:textAppearance="?android:attr/textAppearanceSmall"
+        p1:layout_width="355.0dp"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/GoalDetails_descText"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        p1:layout_width="match_parent"
+        p1:layout_height="18.5dp"
+        p1:id="@+id/GoalDetails_progressBar"
+        p1:max="100"
+        p1:progress="38"
+        p1:indeterminateTint="#ffb4b4b4"
+        p1:progressTint="#ff7fffd4"
+        p1:scaleY="2"
+        p1:layout_marginTop="20dp" />
+    <TextView xmlns:tools="http://schemas.android.com/tools"
+        p1:text="Small Text"
+        p1:textAppearance="?android:attr/textAppearanceSmall"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/GoalDetails_progressText"
+        tools:text="38/100"
+        p1:gravity="center" />
+    <Button
+        p1:text="Add"
+        p1:layout_width="match_parent"
+        p1:layout_height="46.5dp"
+        p1:id="@+id/GoalDetails_addButton"
+        p1:layout_marginTop="40dp"
+        p1:visibility="visible" />
+    <TextView
+        p1:text="Your cupon code"
+        p1:textAppearance="?android:attr/textAppearanceMedium"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/GoalDetails_cuponStaticText"
+        p1:visibility="invisible" />
+    <EditText
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/GoalDetails_cuponText"
+        p1:editable="false"
+        p1:gravity="center"
+        p1:visibility="invisible"
+        p1:inputType="none"
+        p1:textIsSelectable="true" />
 </LinearLayout>

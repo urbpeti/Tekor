@@ -39,7 +39,7 @@ namespace TekorMobil
 
             loginButton.Click += (sender, e) =>
             {
-                string url = "http://urbpeti.sch.bme.hu:44310";
+                string url = Resources.GetString(Resource.String.service_url);
                 var client = new HttpClient
                 {
                     BaseAddress = new Uri(url)

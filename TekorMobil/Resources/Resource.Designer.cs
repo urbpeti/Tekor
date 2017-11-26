@@ -44,56 +44,77 @@ namespace TekorMobil
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040007
-			public const int Email = 2130968583;
+			// aapt resource value: 0x7f04000e
+			public const int Email = 2130968590;
 			
-			// aapt resource value: 0x7f04000f
-			public const int EmailText = 2130968591;
+			// aapt resource value: 0x7f040016
+			public const int EmailText = 2130968598;
+			
+			// aapt resource value: 0x7f040013
+			public const int ErrorMessage = 2130968595;
 			
 			// aapt resource value: 0x7f04000c
-			public const int ErrorMessage = 2130968588;
+			public const int GoalDescription = 2130968588;
 			
 			// aapt resource value: 0x7f040005
-			public const int GoalDescription = 2130968581;
-			
-			// aapt resource value: 0x7f040003
-			public const int GoalListView = 2130968579;
-			
-			// aapt resource value: 0x7f040004
-			public const int GoalName = 2130968580;
-			
-			// aapt resource value: 0x7f04000d
-			public const int GoalsMenuButton = 2130968589;
-			
-			// aapt resource value: 0x7f04000a
-			public const int LoginButton = 2130968586;
-			
-			// aapt resource value: 0x7f04000e
-			public const int MyCuponsButton = 2130968590;
-			
-			// aapt resource value: 0x7f040009
-			public const int Password = 2130968585;
-			
-			// aapt resource value: 0x7f040008
-			public const int PasswordText = 2130968584;
-			
-			// aapt resource value: 0x7f040010
-			public const int Registration = 2130968592;
-			
-			// aapt resource value: 0x7f04000b
-			public const int RegistrationButton = 2130968587;
+			public const int GoalDetails_addButton = 2130968581;
 			
 			// aapt resource value: 0x7f040006
-			public const int UserEmailText = 2130968582;
+			public const int GoalDetails_cuponStaticText = 2130968582;
+			
+			// aapt resource value: 0x7f040007
+			public const int GoalDetails_cuponText = 2130968583;
+			
+			// aapt resource value: 0x7f040002
+			public const int GoalDetails_descText = 2130968578;
+			
+			// aapt resource value: 0x7f040001
+			public const int GoalDetails_nameText = 2130968577;
+			
+			// aapt resource value: 0x7f040003
+			public const int GoalDetails_progressBar = 2130968579;
+			
+			// aapt resource value: 0x7f040004
+			public const int GoalDetails_progressText = 2130968580;
+			
+			// aapt resource value: 0x7f04000a
+			public const int GoalListView = 2130968586;
+			
+			// aapt resource value: 0x7f04000b
+			public const int GoalName = 2130968587;
+			
+			// aapt resource value: 0x7f040014
+			public const int GoalsMenuButton = 2130968596;
+			
+			// aapt resource value: 0x7f040011
+			public const int LoginButton = 2130968593;
+			
+			// aapt resource value: 0x7f040015
+			public const int MyCuponsButton = 2130968597;
+			
+			// aapt resource value: 0x7f040010
+			public const int Password = 2130968592;
+			
+			// aapt resource value: 0x7f04000f
+			public const int PasswordText = 2130968591;
+			
+			// aapt resource value: 0x7f040017
+			public const int Registration = 2130968599;
+			
+			// aapt resource value: 0x7f040012
+			public const int RegistrationButton = 2130968594;
+			
+			// aapt resource value: 0x7f04000d
+			public const int UserEmailText = 2130968589;
 			
 			// aapt resource value: 0x7f040000
 			public const int linearLayout1 = 2130968576;
 			
-			// aapt resource value: 0x7f040001
-			public const int textView1 = 2130968577;
+			// aapt resource value: 0x7f040008
+			public const int textView1 = 2130968584;
 			
-			// aapt resource value: 0x7f040002
-			public const int textView2 = 2130968578;
+			// aapt resource value: 0x7f040009
+			public const int textView2 = 2130968585;
 			
 			static Id()
 			{
@@ -141,6 +162,9 @@ namespace TekorMobil
 			
 			// aapt resource value: 0x7f030000
 			public const int app_name = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int service_url = 2130903041;
 			
 			static String()
 			{

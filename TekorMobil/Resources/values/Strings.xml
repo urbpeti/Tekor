@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">TekorMobil</string>
+  <string name="service_url">http://10.0.2.2:44310</string>
 </resources>

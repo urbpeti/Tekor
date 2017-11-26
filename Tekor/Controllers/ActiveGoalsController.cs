@@ -25,7 +25,7 @@ namespace Tekor.Controllers
                 return Unauthorized();
             }
             ActualGoalState actualGoalState = await _context.ActualGoalState
-                                                        .Include(x => x.Goal)
+                                                        .Include(x => x.Goal.Reward)
                                                         .Include(x => x.User)
                                                         .FirstOrDefaultAsync(x => x.Goal.ID == goalID && x.User.UserToken == usertoken);
             if (actualGoalState == null)
@@ -40,7 +40,51 @@ namespace Tekor.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            return Ok(new { sdf = actualGoalState });
+            string rewardCode = string.Empty;
+            if (actualGoalState.IsFinished)
+            {
+                rewardCode = actualGoalState.Goal.Reward.CuponCode;
+            }
+
+            object result = new { ID = actualGoalState.ID,
+                                  RewardName = actualGoalState.Goal.Name,
+                                  Description = actualGoalState.Goal.Description,
+                                  GoalValue = actualGoalState.Goal.GoalValue,
+                                  ActualValue = actualGoalState.ActualValue,
+                                  UserToken = actualGoalState.User.UserToken,
+                                  CuponCode = rewardCode };
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddProgress([FromQuery]string usertoken, [FromQuery] string goalID)
+        {
+            if (!await _context.UserAcount.AnyAsync(x => x.UserToken == usertoken))
+            {
+                return Unauthorized();
+            }
+            ActualGoalState actualGoalState = await _context.ActualGoalState
+                                                        .Include(x => x.Goal.Reward)
+                                                        .Include(x => x.User)
+                                                        .FirstOrDefaultAsync(x => x.Goal.ID == goalID && x.User.UserToken == usertoken);
+
+            if (actualGoalState == null)
+            {
+                return BadRequest();
+            }
+
+            actualGoalState.ActualValue += 1;
+
+            string rewardCode = string.Empty;
+            if (actualGoalState.ActualValue == actualGoalState.Goal.GoalValue)
+            {
+                actualGoalState.IsFinished = true;
+                rewardCode = actualGoalState.Goal.Reward.CuponCode;
+            }
+            await _context.SaveChangesAsync();
+
+            return Ok(rewardCode);
         }
 
     }

@@ -33,14 +33,14 @@ namespace TekorMobil
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Menu);
 
-            Button goalsButotn = FindViewById<Button>(Resource.Id.GoalsMenuButton);
-            Button myCuponsButotn = FindViewById<Button>(Resource.Id.MyCuponsButton);
+            Button goalsButton = FindViewById<Button>(Resource.Id.GoalsMenuButton);
+            Button myCuponsButton = FindViewById<Button>(Resource.Id.MyCuponsButton);
 
 
-            goalsButotn.Click += async (sender, e) =>
+            goalsButton.Click += async (sender, e) =>
             {
 
-                string url = "http://urbpeti.sch.bme.hu:44310";
+                string url = Resources.GetString(Resource.String.service_url);
                 var client = new HttpClient
                 {
                     BaseAddress = new Uri(url)
@@ -77,6 +77,48 @@ namespace TekorMobil
                     return;
                 }
             };
+
+
+            myCuponsButton.Click += async (sender, e) =>
+            {
+
+                string url = Resources.GetString(Resource.String.service_url);
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(url)
+                };
+                HttpResponseMessage response = null;
+                try
+                {
+                    var progressDialog = ProgressDialog.Show(this, "Please wait...", "Checking account info...", true);
+                    new Thread(new ThreadStart(async delegate
+                    {
+                        //LOAD METHOD TO GET ACCOUNT INFO
+                        response = await client.GetAsync("/Goals/GetFinishedList?token=" + (Application as TekorApplication).Token);
+
+                        if (response?.StatusCode == HttpStatusCode.OK)
+                        {
+                            //save application email Token
+                            var intent = new Intent(this, typeof(GoalsActivity));
+                            intent.PutExtra("Data", await response.Content.ReadAsStringAsync());
+                            RunOnUiThread(() => progressDialog.Hide());
+                            StartActivity(intent);
+                            return;
+                        }
+                        RunOnUiThread(() =>
+                        {
+                            Toast.MakeText(this.ApplicationContext, "Error Occured", ToastLength.Short).Show();
+                        });
+
+                        RunOnUiThread(() => progressDialog.Hide());
+                    })).Start();
+                }
+                catch (Exception)
+                {
+                    Toast.MakeText(this.ApplicationContext, "Server is unavailable", ToastLength.Short).Show();
+                    return;
+                }
+            };
         }
 
         private async Task<bool> IsLoggedIn()
@@ -85,7 +127,7 @@ namespace TekorMobil
             if (application.Email == "" || application.Token == "")
                 return false;
 
-            string url = "http://urbpeti.sch.bme.hu:44310";
+            string url = Resources.GetString(Resource.String.service_url);
             var client = new HttpClient
             {
                 BaseAddress = new Uri(url)

@@ -9,6 +9,7 @@ namespace Tekor.Data
     {
         public string ID { get; set; }
         public Reward Reward { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public double GoalValue { get; set; }
         public string OwnerId { get; set; }

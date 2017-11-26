@@ -33,7 +33,7 @@ namespace TekorMobil
             registrationButton.Click += async (sender, e) =>
             {
 
-                string url = "http://urbpeti.sch.bme.hu:44310";
+                string url = Resources.GetString(Resource.String.service_url);
                 var client = new HttpClient
                 {
                     BaseAddress = new Uri(url)
@@ -41,14 +41,25 @@ namespace TekorMobil
                 string jsonData = $@"{{""email"" : ""{email.Text}"", ""token"" : ""{RestService.Base64Encode(email.Text + ":" + password.Text)}""}}";
 
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                HttpResponseMessage response;
-                try
-                {
+                HttpResponseMessage response = null;
+                
                     var progressDialog = ProgressDialog.Show(this, "Please wait...", "Registration in progress...", true);
                     new Thread(new ThreadStart(async delegate
                     {
                         //LOAD METHOD TO GET ACCOUNT INFO
-                        response = await client.PostAsync("/Registration/Registration", content);
+                        try
+                        {
+                            response = await client.PostAsync("/Registration/Registration", content);
+                        }
+                        catch (Exception)
+                        {
+                            RunOnUiThread(() =>
+                            {
+                                Toast.MakeText(this.ApplicationContext, "Error Occured", ToastLength.Short).Show();
+                            });
+                            RunOnUiThread(() => progressDialog.Hide());
+                            return;
+                        }
 
                         if (response?.StatusCode == HttpStatusCode.OK)
                         {
@@ -67,12 +78,8 @@ namespace TekorMobil
 
                         RunOnUiThread(() => progressDialog.Hide());
                     })).Start();
-                }
-                catch (Exception)
-                {
-                    Toast.MakeText(this.ApplicationContext, "Server is unavailable", ToastLength.Short).Show();
-                    return;
-                }
+                
+                
 
             };
 
