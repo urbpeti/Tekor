@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using System.Net.Http;
 using System.Net;
+using System.Threading;
 
 namespace TekorMobil
 {
@@ -31,34 +32,47 @@ namespace TekorMobil
 
             registrationButton.Click += async (sender, e) =>
             {
+
                 string url = "http://urbpeti.sch.bme.hu:44310";
                 var client = new HttpClient
                 {
                     BaseAddress = new Uri(url)
                 };
-
                 string jsonData = $@"{{""email"" : ""{email.Text}"", ""token"" : ""{RestService.Base64Encode(email.Text + ":" + password.Text)}""}}";
 
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
                 HttpResponseMessage response;
                 try
                 {
-                    response = await client.PostAsync("/Registration/Registration", content);
+                    var progressDialog = ProgressDialog.Show(this, "Please wait...", "Registration in progress...", true);
+                    new Thread(new ThreadStart(async delegate
+                    {
+                        //LOAD METHOD TO GET ACCOUNT INFO
+                        response = await client.PostAsync("/Registration/Registration", content);
+
+                        if (response?.StatusCode == HttpStatusCode.OK)
+                        {
+                            //save application email Token
+                            RunOnUiThread(() =>
+                            {
+                                Toast.MakeText(this.ApplicationContext, "Success", ToastLength.Long).Show();
+                            });
+                            RunOnUiThread(() => progressDialog.Hide());
+                            return;
+                        }
+                        RunOnUiThread(() =>
+                        {
+                            Toast.MakeText(this.ApplicationContext, "Error Occured", ToastLength.Short).Show();
+                        });
+
+                        RunOnUiThread(() => progressDialog.Hide());
+                    })).Start();
                 }
                 catch (Exception)
                 {
-                    errorText.Text = "Server is unavailable";
-                    errorText.Visibility = ViewStates.Visible;
+                    Toast.MakeText(this.ApplicationContext, "Server is unavailable", ToastLength.Short).Show();
                     return;
                 }
-
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    Finish();
-                    return;
-                }
-                errorText.Text = "Error";
-                errorText.Visibility = ViewStates.Visible;
 
             };
 

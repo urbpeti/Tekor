@@ -56,7 +56,7 @@ namespace Tekor.Pages.Goals
             if (await TryUpdateModelAsync<Goal>(
                 goalToUpdate,
                 "goal",
-                g => g.Reward, g => g.Description, g => g.GoalValue, g => g.ActualGoalStates, g=>g.OwnerId))
+                g => g.Reward, g => g.Description, g => g.GoalValue, g=>g.OwnerId))
             {
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");

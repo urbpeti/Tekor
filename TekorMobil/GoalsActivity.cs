@@ -33,6 +33,16 @@ namespace TekorMobil
             var goalAdapter = new GoalsAdapter(this, goalList);
             var goalListView = FindViewById<ListView>(Resource.Id.GoalListView);
             goalListView.Adapter = goalAdapter;
+            goalListView.ItemClick += (sender, ItemClickEvent) =>
+            {
+                var listView = sender as ListView;
+                var t = goalList[ItemClickEvent.Position];
+
+                var intent = new Intent(this, typeof(GoalDetailsActivity));
+                intent.PutExtra("GoalID", goalList[ItemClickEvent.Position].ID);
+                StartActivity(intent);
+                //Android.Widget.Toast.MakeText(this, t.Name, Android.Widget.ToastLength.Short).Show();
+            };
 
         }
     }

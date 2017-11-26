@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 
 namespace TekorMobil
 {
@@ -38,31 +39,43 @@ namespace TekorMobil
 
             goalsButotn.Click += async (sender, e) =>
             {
+
                 string url = "http://urbpeti.sch.bme.hu:44310";
                 var client = new HttpClient
                 {
                     BaseAddress = new Uri(url)
                 };
-                HttpResponseMessage response;
+                HttpResponseMessage response = null;
                 try
                 {
-                    response = await client.GetAsync("/Goals/GetList?token=" + (Application as TekorApplication).Token);
+                    var progressDialog = ProgressDialog.Show(this, "Please wait...", "Checking account info...", true);
+                    new Thread(new ThreadStart(async delegate
+                    {
+                        //LOAD METHOD TO GET ACCOUNT INFO
+                        response = await client.GetAsync("/Goals/GetList?token=" + (Application as TekorApplication).Token);
+
+                        if (response?.StatusCode == HttpStatusCode.OK)
+                        {
+                            //save application email Token
+                            var intent = new Intent(this, typeof(GoalsActivity));
+                            intent.PutExtra("Data", await response.Content.ReadAsStringAsync());
+                            RunOnUiThread(() => progressDialog.Hide());
+                            StartActivity(intent);
+                            return;
+                        }
+                        RunOnUiThread(() =>
+                        {
+                            Toast.MakeText(this.ApplicationContext, "Error Occured", ToastLength.Short).Show();
+                        });
+
+                        RunOnUiThread(() => progressDialog.Hide());
+                    })).Start();
                 }
                 catch (Exception)
                 {
-                    Toast.MakeText(this.ApplicationContext, "Error Occured", ToastLength.Short).Show();
+                    Toast.MakeText(this.ApplicationContext, "Server is unavailable", ToastLength.Short).Show();
                     return;
                 }
-
-                // var result = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    var intent = new Intent(this, typeof(GoalsActivity));
-                    intent.PutExtra("Data", await response.Content.ReadAsStringAsync());
-                    StartActivity(intent);
-                    return;
-                }
-                Toast.MakeText(this.ApplicationContext, "Error Occured!", ToastLength.Short).Show();
             };
         }
 
@@ -91,30 +104,6 @@ namespace TekorMobil
             return false;
         }
 
-
-        /*private async Task<JsonValue> FetchWeatherAsync(string url)
-        {
-            // Create an HTTP web request using the URL:
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
-            request.ContentType = "application/json";
-            request.Method = "GET";
-
-            // Send the request to the server and wait for the response:
-            using (WebResponse response = await request.GetResponseAsync())
-            {
-                // Get a stream representation of the HTTP web response:
-                using (Stream stream = response.GetResponseStream())
-                {
-                    StreamReader reader = new StreamReader(stream);
-                    string text = reader.ReadToEnd();
-                    // Use this stream to build a JSON document object:
-                    JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-
-                    // Return the JSON document:
-                    return jsonDoc;
-                }
-            }
-        }*/
     }
 }
 

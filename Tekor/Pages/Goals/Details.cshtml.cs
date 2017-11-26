@@ -32,7 +32,7 @@ namespace Tekor.Pages.Goals
             }
 
             var companyId = _userManager.GetUserId(User);
-            Goal = await _context.Goal.Include(x=> x.Reward).SingleOrDefaultAsync(m => m.ID == id);
+            Goal = await _context.Goal.Include(x=> x.Reward).SingleOrDefaultAsync(m => m.ID == id && m.OwnerId == companyId);
 
             if (Goal == null)
             {

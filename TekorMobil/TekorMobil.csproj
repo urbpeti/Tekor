@@ -61,6 +61,7 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GoalDetailsActivity.cs" />
     <Compile Include="GoalsActivity.cs" />
     <Compile Include="GoalsAdapter.cs" />
     <Compile Include="LoginActivity.cs" />
@@ -89,6 +90,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Registration.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\GoalDetails.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

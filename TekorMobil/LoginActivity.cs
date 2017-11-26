@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using System.Net.Http;
 using System.Net;
+using System.Threading;
 
 namespace TekorMobil
 {
@@ -36,7 +37,7 @@ namespace TekorMobil
                 StartActivity(registrationIntent);
             };
 
-            loginButton.Click += async (sender, e) =>
+            loginButton.Click += (sender, e) =>
             {
                 string url = "http://urbpeti.sch.bme.hu:44310";
                 var client = new HttpClient
@@ -47,10 +48,34 @@ namespace TekorMobil
                 string jsonData = $@"{{""email"" : ""{email.Text}"", ""token"" : ""{RestService.Base64Encode(email.Text + ":" + password.Text)}""}}";
 
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                HttpResponseMessage response;
+                HttpResponseMessage response = null;
                 try
                 {
-                    response = await client.PostAsync("/Login/isLoggedIn", content);
+                    var progressDialog = ProgressDialog.Show(this, "Please wait...", "Checking account info...", true);
+                    new Thread(new ThreadStart(async delegate
+                    {
+                        //LOAD METHOD TO GET ACCOUNT INFO
+                        response = await client.PostAsync("/Login/isLoggedIn", content);
+
+                        if (response?.StatusCode == HttpStatusCode.OK)
+                        {
+                            (Application as TekorApplication).Email = email.Text;
+                            (Application as TekorApplication).Token = RestService.Base64Encode(email.Text + ":" + password.Text);
+
+                            //save application email Token
+                            var intent = new Intent(this, typeof(MainActivity));
+                            StartActivity(intent);
+                            Finish();
+                            return;
+                        }
+                        RunOnUiThread(() =>
+                        {
+                            errorText.Text = "Wrong User and Password combination";
+                            errorText.Visibility = ViewStates.Visible;
+                        });
+                        
+                        RunOnUiThread(() => progressDialog.Hide());
+                    })).Start();
                 }
                 catch (Exception)
                 {
@@ -60,19 +85,7 @@ namespace TekorMobil
                 }
 
                 // var result = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    (Application as TekorApplication).Email = email.Text;
-                    (Application as TekorApplication).Token = RestService.Base64Encode(email.Text + ":" + password.Text);
 
-                    //save application email Token
-                    var intent = new Intent(this, typeof(MainActivity));
-                    StartActivity(intent);
-                    Finish();
-                    return;
-                }
-                errorText.Text = "Wrong User and Password combination";
-                errorText.Visibility = ViewStates.Visible;
             };
         }
     }

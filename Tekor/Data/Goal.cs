@@ -11,7 +11,6 @@ namespace Tekor.Data
         public Reward Reward { get; set; }
         public string Description { get; set; }
         public double GoalValue { get; set; }
-        public IList<ActualGoalState> ActualGoalStates { get; set; }
         public string OwnerId { get; set; }
     }
 }

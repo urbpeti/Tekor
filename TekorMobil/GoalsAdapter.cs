@@ -50,10 +50,12 @@ namespace TekorMobil
         public class ListItemData {
             public string Description;
             public string Name;
-            public ListItemData(string description, string name)
+            public string ID;
+            public ListItemData(string description, string name, string id)
             {
                 this.Description = description;
                 this.Name = name;
+                this.ID = id;
             }
         }
     }

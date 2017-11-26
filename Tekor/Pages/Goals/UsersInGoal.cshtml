@@ -1,0 +1,36 @@
+﻿@page
+@model Tekor.Pages.Goals.UsersInGoalModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>@Html.DisplayNameFor(model => model.ActualGoals[0].Goal.Reward.Name)</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ActualGoals[0].User.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActualGoals[0].ActualValue)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ActualGoals)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActualValue)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-page="./Index" class="btn btn-default">Back to List</a>
+</div>

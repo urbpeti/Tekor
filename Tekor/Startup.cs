@@ -93,7 +93,7 @@ namespace Tekor
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action=Index}/{token?}");
+                    template: "{controller}/{action=Index}");
             });
         }
     }

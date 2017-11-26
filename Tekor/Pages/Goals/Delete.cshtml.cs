@@ -33,7 +33,7 @@ namespace Tekor.Pages.Goals
             }
 
             var companyId = _userManager.GetUserId(User);
-            Goal = await _context.Goal.Include(x=> x.Reward).SingleOrDefaultAsync(m => m.ID == id);
+            Goal = await _context.Goal.Include(x=> x.Reward).SingleOrDefaultAsync(m => m.ID == id && m.OwnerId == companyId);
 
             if (Goal == null)
             {
@@ -48,12 +48,14 @@ namespace Tekor.Pages.Goals
             {
                 return NotFound();
             }
-
-            Goal = await _context.Goal.Include(x => x.Reward).FirstOrDefaultAsync(x=> x.ID == id);
+            var companyId = _userManager.GetUserId(User);
+            Goal = await _context.Goal.Include(x => x.Reward).FirstOrDefaultAsync(x=> x.ID == id && x.OwnerId == companyId);
             
             if (Goal != null)
             {
                 _context.Remove(Goal.Reward);
+                var actualGoals = _context.ActualGoalState.Include(x=>x.Goal).Where(x=> x.Goal.ID == id && x.Goal.OwnerId == companyId);
+                _context.RemoveRange(actualGoals);
                 _context.Goal.Remove(Goal);
                 await _context.SaveChangesAsync();
             }

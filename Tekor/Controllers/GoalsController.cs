@@ -17,14 +17,14 @@ namespace Tekor.Controllers
         {
             _context = context;
         }
-        [HttpGet("{token?}")]
-        public async Task<IActionResult> GetList(string token)
+        [HttpGet]
+        public async Task<IActionResult> GetList([FromQuery]string token)
         {
             if (!await _context.UserAcount.AnyAsync(x => x.UserToken == token)) {
                 return Unauthorized();
             }
             List<Goal> test = _context.Goal.Include(x=> x.Reward).ToList();
-            List<object> goalItems = test.Select(x => new { x.Description ,x.Reward.Name }).ToList<object>();
+            List<object> goalItems = test.Select(x => new { x.Description ,x.Reward.Name, x.ID }).ToList<object>();
 
             //List<string> test = new List<string> { "siker", "siker2", "siker3" };
             return Ok(new { goalItems = goalItems});

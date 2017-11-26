@@ -25,9 +25,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Goal[0].Reward.CuponCode)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Goal[0].ActualGoalStates)
-                </th>
             <th></th>
         </tr>
     </thead>
@@ -47,11 +44,9 @@
                 @Html.DisplayFor(modelItem => item.Reward.CuponCode)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ActualGoalStates.Count)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID" class="btn btn-default">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-default">Details</a> |
+                <a asp-page="./UsersInGoal" asp-route-id="@item.ID" class="btn btn-default">See Users</a>
+                <a asp-page="./Edit" asp-route-id="@item.ID" class="btn btn-default">Edit</a>
+                <a asp-page="./Details" asp-route-id="@item.ID" class="btn btn-default">Details</a>
                 <a asp-page="./Delete" asp-route-id="@item.ID" class="btn btn-default">Delete</a>
             </td>
         </tr>

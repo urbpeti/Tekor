@@ -109,19 +109,22 @@ namespace TekorMobil
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Goals = 2130837504;
+			public const int GoalDetails = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int GoalsListItem = 2130837505;
+			public const int Goals = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int Login = 2130837506;
+			public const int GoalsListItem = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int Menu = 2130837507;
+			public const int Login = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int Registration = 2130837508;
+			public const int Menu = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int Registration = 2130837509;
 			
 			static Layout()
 			{
