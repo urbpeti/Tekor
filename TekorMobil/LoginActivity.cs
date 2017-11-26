@@ -15,7 +15,7 @@ using System.Threading;
 
 namespace TekorMobil
 {
-    [Activity(Label = "LoginActivity")]
+    [Activity(Label = "Login")]
     public class LoginActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

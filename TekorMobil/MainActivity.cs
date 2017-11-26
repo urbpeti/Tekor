@@ -16,7 +16,7 @@ using System.Threading;
 
 namespace TekorMobil
 {
-    [Activity(Label = "TekorMobil", MainLauncher = true)]
+    [Activity(Label = "Tekor", MainLauncher = true)]
     public class MainActivity : Activity
     {
         protected async override void OnCreate(Bundle savedInstanceState)

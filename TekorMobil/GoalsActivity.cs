@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace TekorMobil
 {
-    [Activity(Label = "GoalsActivity")]
+    [Activity(Label = "Goals")]
     public class GoalsActivity : Activity
     {
         public class GoalsListData {

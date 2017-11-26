@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 
 namespace TekorMobil
 {
-    [Activity(Label = "GoalDetailsActivity"/*, MainLauncher = true*/)]
+    [Activity(Label = "Goal Details" )]
     public class GoalDetailsActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
